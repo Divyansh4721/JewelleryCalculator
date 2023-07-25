@@ -1,6 +1,41 @@
 <html lang="en">
 
 <head>
+    <script>
+        var GoldPrice = "6000";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
     <title>Jewellery Calculator</title>
     <style>
@@ -103,7 +138,7 @@
                     <option value="96">23/85 |96</option>
                 </select>
                 <label for="goldprice">24ct Gold Price</label>
-                <input id="goldprice" type="number" value="6000" placeholder="24ct Gold Price">
+                <input id="goldprice" type="number" placeholder="24ct Gold Price">
                 <label for="wastage">Wastage %</label>
                 <input id="wastage" type="number" placeholder="Wastage %">
             </div>
@@ -136,6 +171,7 @@
     <button onclick="location.reload()">Reset</button>
 </body>
 <script>
+    document.getElementById("goldprice").value = GoldPrice;
     function changefunc() {
         let goldweight = document.getElementById("goldweight").value;
         let goldpurity = document.getElementById("goldpurity").value;
