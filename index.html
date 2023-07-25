@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewellery Calculator</title>
+    <style>
+        input {
+            position: relative;
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 14px 16px;
+            font-size: 17px;
+            border: 1px solid #dfe1e4;
+            border-radius: 10px;
+            outline: 0
+        }
+
+        select {
+            position: relative;
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 14px 16px;
+            font-size: 17px;
+            border: 1px solid #dfe1e4;
+            border-radius: 10px;
+            outline: 0
+        }
+    </style>
+</head>
+
+<body>
+    <input id="goldweight" type="number" placeholder="Gold Weight In gms"><br><br>
+    <select id="goldpurity">
+        <option value="60">14</option>
+        <option value="75">18</option>
+        <option value="100">22 KDM</option>
+        <option value="96">23 / 85</option>
+    </select>
+    <br><br>
+    <input id="goldprice" type="number" placeholder="24ct Gold Price"><br><br>
+    <input id="mosweight" type="number" placeholder="Moissanite Weight In ct"><br><br>
+    <input id="mosprice" type="number" placeholder="Moissanite Price Per ct"><br><br>
+    <input id="stoneweight" type="number" placeholder="Stone Price"><br><br>
+    <input id="wastage" type="number" placeholder="Wastage %"><br><br>
+    <input id="result" type="number" placeholder="Result" disabled><br><br>
+</body>
+<script>
+    function changefunc() {
+        let goldweight = document.getElementById("goldweight").value;
+        let goldpurity = document.getElementById("goldpurity").value;
+        let goldprice = document.getElementById("goldprice").value;
+        let mosweight = document.getElementById("mosweight").value;
+        let mosprice = document.getElementById("mosprice").value;
+        let stoneweight = document.getElementById("stoneweight").value;
+        let wastage = document.getElementById("wastage").value;
+        if (goldprice.toString().length < 5) {
+            goldprice = goldprice * 10;
+        }
+        document.getElementById("result").value = Math.floor((((goldpurity * 1) + (wastage * 1)) / 100) * (goldprice / 10) * (goldweight) + (mosprice * mosweight) + (stoneweight * 1));
+    }
+    document.addEventListener("change", changefunc);
+    document.addEventListener("keyup", changefunc);
+</script>
+
+</html>
