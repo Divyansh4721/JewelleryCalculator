@@ -1,52 +1,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
     <title>Jewellery Calculator</title>
     <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
         input {
             position: relative;
+            height: 10%;
             width: 80%;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 14px 16px;
-            font-size: 17px;
+            padding-left: 10px;
             border: 1px solid #dfe1e4;
             border-radius: 10px;
-            outline: 0
+            font-size: 12px;
+        }
+
+        label {
+            position: relative;
+            height: fit-content;
+            font-size: 12px;
         }
 
         select {
             position: relative;
+            height: 10%;
             width: 80%;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 14px 16px;
-            font-size: 17px;
+            padding-left: 10px;
             border: 1px solid #dfe1e4;
             border-radius: 10px;
-            outline: 0
+            font-size: 12px;
+        }
+
+        #maincontainer {
+            margin: 10px;
+            border: 2px solid black;
+            width: 100%;
+            height: 50%;
+            display: flex;
+        }
+
+        #leftcontainer {
+            border-right: 2px solid black;
+            width: 50%;
+            height: 100%;
+        }
+
+        #rightcontainer {
+            width: 50%;
+            height: 100%;
+        }
+
+        #righttopcontainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-bottom: 2px solid black;
+            width: 100%;
+            height: 50%;
+        }
+
+        #rightbottomcontainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            height: 50%;
         }
     </style>
 </head>
 
 <body>
-    <input id="goldweight" type="number" placeholder="Gold Weight In gms"><br><br>
-    <select id="goldpurity">
-        <option value="60">14</option>
-        <option value="75">18</option>
-        <option value="100">22 KDM</option>
-        <option value="96">23 / 85</option>
-    </select>
-    <br><br>
-    <input id="goldprice" type="number" placeholder="24ct Gold Price" value="60000"><br><br>
-    <input id="mosweight" type="number" placeholder="Moissanite Weight In ct"><br><br>
-    <input id="mosprice" type="number" placeholder="Moissanite Price Per ct"><br><br>
-    <input id="stoneweight" type="number" placeholder="Stone Price"><br><br>
-    <input id="wastage" type="number" placeholder="Wastage %"><br><br>
-    <input id="result" type="number" placeholder="Result" disabled><br><br>
+
+    <div id="maincontainer">
+        <div id="leftcontainer">
+            <div id="righttopcontainer">
+                <label for="goldweight">Gold Weight In gms</label>
+                <input id="goldweight" type="number" placeholder="Gold Weight In gms">
+                <label for="goldpurity">Gold Purity</label>
+                <select id="goldpurity">
+                    <option value="60">14</option>
+                    <option value="75">18</option>
+                    <option value="100">22 KDM</option>
+                    <option value="96">23 / 85</option>
+                </select>
+                <label for="goldprice">24ct Gold Price</label>
+                <input id="goldprice" type="number" placeholder="24ct Gold Price">
+                <label for="wastage">Wastage %</label>
+                <input id="wastage" type="number" placeholder="Wastage %">
+            </div>
+            <div id="rightbottomcontainer">
+                <label for="mosweight">Moissanite Weight In ct</label>
+                <input id="mosweight" type="number" placeholder="Moissanite Weight In ct">
+                <label for="mosprice">Moissanite Price Per ct</label>
+                <input id="mosprice" type="number" placeholder="Moissanite Price Per ct">
+                <label for="stoneweight">Stone Price</label>
+                <input id="stoneweight" type="number" placeholder="Stone Price">
+            </div>
+        </div>
+        <div id="rightcontainer">
+            <div id="righttopcontainer">
+                <input id="result" type="number" placeholder="Result"
+                    style="font-size: 20px;height: 30px; font-weight: bold;" disabled>
+            </div>
+            <div id="rightbottomcontainer">
+                <label for="diamondweight">Diamond Weigth in ct</label>
+                <input disabled id="diamondweight" type="number" placeholder="Diamond Weigth in ct">
+                <label for="rapaport">Rapaport Number</label>
+                <input disabled id="rapaport" type="number" placeholder="Rapaport Number">
+                <label for="back">Back (-)</label>
+                <input disabled id="back" type="number" placeholder="Back (-)">
+                <label for="diamondprice">Diamond Price</label>
+                <input id="diamondprice" type="number" placeholder="Diamond Price" style="font-weight: bold;" disabled>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     function changefunc() {
