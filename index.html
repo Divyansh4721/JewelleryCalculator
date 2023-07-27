@@ -165,7 +165,7 @@
                 <input id="back" type="number" placeholder="Back (-)">
                 <label for="dollar">Dollar</label>
                 <input id="dollar" type="number" placeholder="Dollar">
-		<label for="diamondweight">Diamond Weigth in ct</label>
+                <label for="diamondweight">Diamond Weigth in ct</label>
                 <input id="diamondweight" type="number" placeholder="Diamond Weigth in ct">
                 <label for="diamondprice">Diamond Price</label>
                 <input id="diamondprice" type="number" placeholder="Diamond Price" style="font-weight: bold;" disabled>
@@ -198,7 +198,7 @@
         let back = document.getElementById("back").value;
         let dollar = document.getElementById("dollar").value;
         let diamondweight = document.getElementById("diamondweight").value;
-        document.getElementById("diamondprice").value = Math.floor(rapaport * dollar * diamondweight * (100-back));
+        document.getElementById("diamondprice").value = Math.floor(rapaport * dollar * diamondweight * (100 - back));
     }
     document.addEventListener("change", changefunc2);
     document.addEventListener("keyup", changefunc2);
