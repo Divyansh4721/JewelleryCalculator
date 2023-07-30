@@ -146,9 +146,9 @@
             </div>
             <div id="rightbottomcontainer">
                 <label for="mosweight">MD Weight In ct</label>
-                <input id="mosweight" type="number" placeholder="MD Weight In ct">
+                <input id="mosweight" type="text" inputmode="numeric" placeholder="MD Weight In ct">
                 <label for="mosprice">MD Price Per ct</label>
-                <input id="mosprice" type="number" placeholder="MD Price Per ct">
+                <input id="mosprice" type="text" inputmode="numeric" placeholder="MD Price Per ct">
                 <label for="stoneweight">Stone Price</label>
                 <input id="stoneweight" type="number" placeholder="Stone Price">
             </div>
@@ -175,7 +175,35 @@
     <button onclick="location.reload()">Reset</button>
 </body>
 <script>
+
+
+
     document.getElementById("goldprice").value = GoldPrice;
+
+
+
+    function helper(inputString1, inputString2) {
+        if (inputString1 == "" || inputString2 == "") {
+            return 0;
+        }
+        let arr1 = inputString1.split(",").map(parseFloat);
+        let arr2 = inputString2.split(",").map(parseFloat);
+        if (arr1.length !== arr2.length) {
+            return 0;
+        }
+        else if (arr1.length == 1 && arr2.length == 1) {
+            return arr1[0] * arr2[0];
+        }
+
+        let sum = 0;
+        for (let i = 0; i < arr1.length; i++) {
+            sum += arr1[i] * arr2[i];
+        }
+
+        return sum;
+    }
+
+
     function changefunc() {
         let goldweight = document.getElementById("goldweight").value;
         let goldpurity = document.getElementById("goldpurity").value;
@@ -187,7 +215,7 @@
         if (goldprice.toString().length < 5) {
             goldprice = goldprice * 10;
         }
-        document.getElementById("result").value = Math.floor((((goldpurity * 1) + (wastage * 1)) / 100) * (goldprice / 10) * (goldweight) + (mosprice * mosweight) + (stoneweight * 1));
+        document.getElementById("result").value = Math.floor((((goldpurity * 1) + (wastage * 1)) / 100) * (goldprice / 10) * (goldweight) + helper(mosprice, mosweight) + (stoneweight * 1));
     }
     document.addEventListener("change", changefunc);
     document.addEventListener("keyup", changefunc);
