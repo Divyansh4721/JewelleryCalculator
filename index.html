@@ -1,44 +1,53 @@
 <html lang="en">
 
 <head>
-    <script>
-        var GoldPrice = "60500";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
     <link rel="icon" href="logo.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
     <title>Jewellery Calculator</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script>
+        let firebaseConfig = {
+            apiKey: "AIzaSyC2UPzS4WS4rec5VcWUwD15lR7p-Ba7js0",
+            authDomain: "goldrate-b474f.firebaseapp.com",
+            projectId: "goldrate-b474f",
+            storageBucket: "goldrate-b474f.appspot.com",
+            messagingSenderId: "1091177947332",
+            appId: "1:1091177947332:web:f58b7ead15a1b6b1d8a991"
+        };
+        firebase.initializeApp(firebaseConfig);
+        let firestore = firebase.firestore();
+        let docRef = firestore.collection("GoldRate").doc("XRe7zLwLsKAVNKzIrWVh");
+        docRef.get()
+            .then((doc) => {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+                    document.getElementById("goldprice").value = doc.data().Rate;
+                } else {
+                    console.log("No such document!");
+                }
+            })
+            .catch((error) => {
+                console.error("Error getting document:", error);
+            });
+
+        function updatePrice() {
+            let temp = document.getElementById("updateprice").value;
+            if (temp.toString().length != 5) {
+                window.alert("Gold Price not correct!")
+            }
+            docRef.update({
+                    Rate: temp.toString()
+                })
+                .then(() => {
+                    console.log("Document successfully updated!");
+                    location.reload()
+                })
+                .catch((error) => {
+                    console.error("Error updating document: ", error);
+                });
+        }
+    </script>
     <style>
         body {
             margin: 0;
@@ -46,7 +55,7 @@
             justify-content: center;
         }
 
-        input {
+        div input {
             position: relative;
             height: 10%;
             width: 80%;
@@ -111,7 +120,7 @@
             height: 50%;
         }
 
-        button {
+        #reset {
             position: absolute;
             top: 52%;
             width: 30%;
@@ -125,7 +134,6 @@
 </head>
 
 <body>
-
     <div id="maincontainer">
         <div id="leftcontainer">
             <div id="righttopcontainer">
@@ -157,6 +165,8 @@
             <div id="righttopcontainer">
                 <input id="result" type="number" placeholder="Result"
                     style="font-size: 20px;height: 30px; font-weight: bold;" disabled>
+                <input id="updateprice" type="number" placeholder="Update Gold Price">
+                <button onclick="updatePrice()">Update Gold Price</button>
             </div>
             <div id="rightbottomcontainer">
                 <label for="rapaport">Rapaport Number</label>
@@ -172,16 +182,9 @@
             </div>
         </div>
     </div>
-    <button onclick="location.reload()">Reset</button>
+    <button id="reset" onclick="location.reload()">Reset</button>
 </body>
 <script>
-
-
-
-    document.getElementById("goldprice").value = GoldPrice;
-
-
-
     function helper(inputString1, inputString2) {
         if (inputString1 == "" || inputString2 == "") {
             return 0;
@@ -190,19 +193,15 @@
         let arr2 = inputString2.split(",").map(parseFloat);
         if (arr1.length !== arr2.length) {
             return 0;
-        }
-        else if (arr1.length == 1 && arr2.length == 1) {
+        } else if (arr1.length == 1 && arr2.length == 1) {
             return arr1[0] * arr2[0];
         }
-
         let sum = 0;
         for (let i = 0; i < arr1.length; i++) {
             sum += arr1[i] * arr2[i];
         }
-
         return sum;
     }
-
 
     function changefunc() {
         let goldweight = document.getElementById("goldweight").value;
@@ -215,11 +214,11 @@
         if (goldprice.toString().length < 5) {
             goldprice = goldprice * 10;
         }
-        document.getElementById("result").value = Math.floor((((goldpurity * 1) + (wastage * 1)) / 100) * (goldprice / 10) * (goldweight) + helper(mosprice, mosweight) + (stoneweight * 1));
+        document.getElementById("result").value = Math.floor((((goldpurity * 1) + (wastage * 1)) / 100) * (goldprice /
+            10) * (goldweight) + helper(mosprice, mosweight) + (stoneweight * 1));
     }
     document.addEventListener("change", changefunc);
     document.addEventListener("keyup", changefunc);
-
 
     function changefunc2() {
         let rapaport = document.getElementById("rapaport").value;
@@ -230,10 +229,6 @@
     }
     document.addEventListener("change", changefunc2);
     document.addEventListener("keyup", changefunc2);
-
-
-
-
 </script>
 
 </html>
