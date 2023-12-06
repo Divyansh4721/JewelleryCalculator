@@ -32,17 +32,18 @@
         function updatePrice() {
             let temp = document.getElementById("updateprice").value;
             if (temp.toString().length != 5) {
-                window.alert("Gold Price not correct!")
+                window.alert("Gold Price not correct!");
+            } else {
+                docRef.update({
+                        Rate: temp.toString()
+                    })
+                    .then(() => {
+                        location.reload()
+                    })
+                    .catch((error) => {
+                        console.error("Error updating document: ", error);
+                    });
             }
-            docRef.update({
-                    Rate: temp.toString()
-                })
-                .then(() => {
-                    location.reload()
-                })
-                .catch((error) => {
-                    console.error("Error updating document: ", error);
-                });
         }
     </script>
     <style>
